@@ -23,7 +23,7 @@ COPY entrypoint.sh /server-data/entrypoint.sh
 RUN chmod +x /server-data/entrypoint.sh
 ENTRYPOINT ["/server-data/entrypoint.sh"]
 
-EXPOSE 21025, 21026
+EXPOSE 21025 21026
 CMD ["./linux/starbound_server"]
 
 ENV DEBIAN_FRONTEND=""
