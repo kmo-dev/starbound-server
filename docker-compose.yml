@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   starbound:
@@ -8,8 +8,8 @@ services:
     image: starbound-server:latest
     ports:
       - "21025:21025"
-    volumes:
-      - ~/servers/starbound:/starbound/
-    env_file:
-      - steam.env
+      - "21026:21026"
+#    volumes:
+#      - ./server-data:/server-data
+    env_file: steam.env
     restart: always
