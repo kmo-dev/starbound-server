@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  starbound:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        STEAM_USERNAME: ${STEAM_USERNAME}
+        STEAM_PASSWORD: ${STEAM_PASSWORD}
+    ports:
+      - "21025:21025"
+    volumes:
+      - ./starbound:/starbound
+    env_file:
+      - steam.env
+    restart: always
