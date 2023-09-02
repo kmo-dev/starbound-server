@@ -7,12 +7,7 @@ ENV LANG=en_US.utf8
 
 RUN apt-get update && \
     apt-get install -y locales lib32gcc1 curl software-properties-common libvorbisfile3 && \
-    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN dpkg --add-architecture i386 && \
-    apt-get update && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 WORKDIR /server-data/steamcmd
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
