@@ -1,26 +1,27 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 LABEL authors="klemens@morbe.online"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG STEAM_USERNAME
-ARG STEAM_PASSWORD
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
-RUN dpkg --add-architecture i386 && \
-    apt-get update && \
-    apt-get install -y lib32gcc1 curl software-properties-common libvorbisfile3 && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+ENV LANG en_US.utf8
+
+RUN dpkg --add-architecture i386
+RUN apt-get update
+RUN apt-get install -y lib32gcc1 curl software-properties-common libvorbisfile3
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
 
 WORKDIR /steamcmd
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
 WORKDIR /starbound
 
-RUN /steamcmd/steamcmd.sh \
-    +login $STEAM_USERNAME $STEAM_PASSWORD \
-    +force_install_dir /starbound \
-    +app_update 211820 \
-    +quit
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 21025
 

@@ -5,13 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        STEAM_USERNAME: ${STEAM_USERNAME}
-        STEAM_PASSWORD: ${STEAM_PASSWORD}
+    image: starbound-server:latest
     ports:
       - "21025:21025"
     volumes:
-      - ./starbound:/starbound
+      - ~/servers/starbound:/starbound/
     env_file:
       - steam.env
     restart: always
