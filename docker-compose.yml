@@ -9,7 +9,7 @@ services:
     ports:
       - "21025:21025"
       - "21026:21026"
-#    volumes:
-#      - ./server-data:/server-data
+    volumes:
+      - ./server-data/starbound:/server-data/starbound
     env_file: steam.env
     restart: always
