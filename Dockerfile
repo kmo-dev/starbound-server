@@ -16,8 +16,10 @@ ENV LANG=en_US.UTF-8 \
 WORKDIR /server-data
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
+EXPOSE 21025 21026
+
 COPY entrypoint.sh /server-data/entrypoint.sh
 RUN chmod +x /server-data/entrypoint.sh
 ENTRYPOINT ["/server-data/entrypoint.sh"]
 
-EXPOSE 21025 21026
+VOLUME ["/server-data/starbound"]

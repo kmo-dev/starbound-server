@@ -3,12 +3,14 @@ set -e
 
 cd /
 
-server-data/steamcmd.sh \
-    +force_install_dir server-data/starbound \
+/server-data/steamcmd.sh \
+    +force_install_dir /server-data/starbound \
     +login $STEAM_USERNAME $STEAM_PASSWORD \
     +app_update 211820 validate \
     +quit
 
-cd server-data/starbound/linux
+ls -la
 
-exec starbound_server
+cd /server-data/starbound/linux
+
+exec ./starbound_server
